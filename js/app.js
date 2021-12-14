@@ -151,7 +151,6 @@ function handleShowResultsClick(e) {
       let li = document.createElement('li');
       li.textContent = `${allProducts[i].name} was viewed ${allProducts[i].views} times and clicked ${allProducts[i].clicks} times`;
       displayResults.appendChild(li);
-
     }
 
   }
@@ -162,7 +161,6 @@ function handleShowResultsClick(e) {
 renderImages();
 
 myContainer.addEventListener('click', handleImgClick);
-
 
 button.addEventListener('click', handleShowResultsClick);
 
