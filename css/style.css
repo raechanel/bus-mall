@@ -1,0 +1,41 @@
+body {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: rgb(123, 116, 106);
+}
+
+header {
+  background-color: darkolivegreen;
+  width: 90%;
+  margin: auto;
+}
+
+h1 {
+  font-size: 20px;
+  text-align: center;
+  padding: 50px;
+}
+
+section {
+background-color: darkolivegreen;
+display: flex;
+width: 75%;
+margin: 25px auto;
+justify-content: space-around;
+}
+
+img {
+  width:200px;
+  height: 200px;
+  border: 3px solid rgb(70, 17, 17);
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+main div {
+  padding: 10px;
+  width: max-content;
+  border: 3px solid rgb(70, 17, 17);
+  background-color: rosybrown;
+  margin: auto;
+  border-radius: 50px;
+}
