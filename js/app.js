@@ -4,7 +4,7 @@
 
 const allProducts = [];
 
-let allowedAttempts = 5;
+let allowedAttempts = 25;
 
 let clicks = 0;
 
@@ -51,14 +51,21 @@ function getRandomIndex() {
 }
 
 function renderImages() {
-  let productOneIndex = getRandomIndex();
-  let productTwoIndex = getRandomIndex();
-  let productThreeIndex = getRandomIndex();
 
-  // while (productOneIndex === productTwoIndex) {
-  //   productTwoIndex =
-  // }
-  
+  // collection of values - an array
+
+  let productCollection = [];
+
+  while (productCollection.length < 3) {
+    let randomNum = getRandomIndex();
+    while (!productCollection.includes(randomNum)) {
+      productCollection.push(randomNum);
+    }
+  }
+
+  let productOneIndex = productCollection[0];
+  let productTwoIndex = productCollection[1];
+  let productThreeIndex = productCollection[2];
 
   imageOne.src = allProducts[productOneIndex].src;
   imageOne.alt = allProducts[productOneIndex].name;
@@ -73,46 +80,93 @@ function renderImages() {
   allProducts[productThreeIndex].views++;
 }
 
-function handleImageClick(e) {
+// // FUNCTION TO RENDER CHART
+
+// function renderChart() {
+//   const ctx = document.getElementById('chart').getContext('2d');
+
+//   // labels for chart
+
+//   let products = [];
+//   let clicks = [];
+
+
+//   for (let i = 0; allProducts.length; i++) {
+//     products.push(allProducts[i].name);
+//     clicks.push(allProducts[i].clicks);
+//   }
+// }
+
+// let myChartData = {
+//   type: 'bar',
+//   data: {
+//     labels: products,
+//     datasets: [{
+//       label: '# of Votes',
+//       data: clicks,
+//       backgroundColor: ['rgba(75, 192, 192, 0.2)',],
+//       borderColor: ['rgba(255, 99, 132, 1)',],
+//       borderWidth: 1
+//     }]
+//   },
+//   options: {
+//     scales: {
+//       y: {
+//         beginAtZero: true
+//       }
+//     }
+//   }
+// };
+
+
+// const myChart = new Chart(ctx, 
+
+
+
+
+
+
+
+function handleImgClick(e) {
   clicks++;
   let imageClicked = e.target.alt;
+  console.log(imageClicked);
 
-  // console.log(imageClicked);
   for (let i = 0; i < allProducts.length; i++) {
     if (imageClicked === allProducts[i].name) {
       allProducts[i].clicks++;
     }
-
   }
-
   renderImages();
-
   if (clicks === allowedAttempts) {
-    myContainer.removeEventListener('click', handleImageClick);
+    myContainer.removeEventListener('click', handleImgClick);
   }
-
-
 }
 
 
 function handleShowResultsClick(e) {
   let displayResults = document.getElementById('results');
-  if (clicks === allowedAttempts) {
+  if (clicks === allowedAttempts); {
     for (let i = 0; i < allProducts.length; i++) {
       let li = document.createElement('li');
       li.textContent = `${allProducts[i].name} was viewed ${allProducts[i].views} times and clicked ${allProducts[i].clicks} times`;
       displayResults.appendChild(li);
-
     }
 
   }
 
 }
 
+
 renderImages();
 
-myContainer.addEventListener('click', handleImageClick);
+myContainer.addEventListener('click', handleImgClick);
+
+button.addEventListener('click', handleShowResultsClick);
 
 
-showResults.addEventListener('click', handleShowResultsClick);
+
+
+
+
 
