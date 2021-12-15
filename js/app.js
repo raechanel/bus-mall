@@ -1,21 +1,20 @@
 'use strict';
 
-// console.log('hi guise');
 
-const allProducts = [];
+let allProducts = [];
 
-let allowedAttempts = 5;
+let allowedAttempts = 25;
 
 let clicks = 0;
 
-let myContainer = document.getElementById('container')
+let myContainer = document.getElementById('container');
 
 let imageOne = document.getElementById('image-one');
 let imageTwo = document.getElementById('image-two');
 let imageThree = document.getElementById('image-three');
 
-let showResults = document.getElementById('results');
 
+let button = document.getElementById('button');
 
 function BusMall(name, fileExtention = 'jpeg') {
   this.name = name;
@@ -103,37 +102,33 @@ function renderChart() {
 
   let myChartData = {
     type: 'bar',
-    defaults: {
-      color: 'red'
-    },
     data: {
       labels: products,
       datasets: [{
         label: '# of Votes',
         data: clicks,
-        backgroundColor: 'rgba(226, 134, 150, 1)',
-        borderColor: 'rgba(0, 0, 0, 1)',
-        color: '#F00',
+        backgroundColor: 'rgba(209, 216, 19, 0.95)',
+        borderColor: 'rgba(209, 216, 19, 0.95)',
         borderWidth: 3
       },
       {
         label: '# of Views',
         data: views,
-        backgroundColor: 'rgba(226, 134, 150, 1)',
-        borderColor: 'rgba(0, 0, 0, 1)',
+        backgroundColor: 'rgba(128, 11, 25, 0.95)',
+        borderColor: 'rgba(128, 11, 25, 0.95)',
         borderWidth: 3
       }]
     },
     options: {
       plugins: {
-      legend: {
-        labels: {
-          color: 'black',
+        legend: {
+          labels: {
+            color: 'black',
+          }
         }
-      }
-    },
+      },
       scales: {
-        y: {  
+        y: {
           beginAtZero: true
         },
         x: {
@@ -143,12 +138,12 @@ function renderChart() {
         }
       }
     }
-  }
+  };
 
 
-  const myChart = new Chart(ctx, myChartData)
+  const myChart = new Chart(ctx, myChartData);
 
-};
+}
 
 
 
@@ -158,7 +153,6 @@ function renderChart() {
 function handleImgClick(e) {
   clicks++;
   let imageClicked = e.target.alt;
-  console.log(imageClicked);
 
   for (let i = 0; i < allProducts.length; i++) {
     if (imageClicked === allProducts[i].name) {
@@ -193,9 +187,6 @@ myContainer.addEventListener('click', handleImgClick);
 button.addEventListener('click', handleShowResultsClick);
 
 
-
-
-// 
 
 
 
