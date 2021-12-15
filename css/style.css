@@ -40,8 +40,13 @@ main div {
   border-radius: 50px;
 }
 
-ul {
-  display: table;
-  margin: 0 auto;
-  padding-top: 100px;
+aside {
+  float: right;
+  height: 500px;
+  width: 200px;
+  background-color: darkolivegreen;
+  margin-right: 10px;
+  margin-left: 10px;
+  overflow-y: scroll;
 }
+
