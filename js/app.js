@@ -4,7 +4,7 @@
 
 const allProducts = [];
 
-let allowedAttempts = 25;
+let allowedAttempts = 5;
 
 let clicks = 0;
 
@@ -56,16 +56,16 @@ function renderImages() {
 
   let productCollection = [];
 
-  while (productCollection.length < 3) {
+  while (productCollection.length < 6) {
     let randomNum = getRandomIndex();
     while (!productCollection.includes(randomNum)) {
       productCollection.push(randomNum);
     }
   }
 
-  let productOneIndex = productCollection[0];
-  let productTwoIndex = productCollection[1];
-  let productThreeIndex = productCollection[2];
+  let productOneIndex = productCollection.shift();
+  let productTwoIndex = productCollection.shift();
+  let productThreeIndex = productCollection.shift();
 
   imageOne.src = allProducts[productOneIndex].src;
   imageOne.alt = allProducts[productOneIndex].name;
@@ -80,47 +80,74 @@ function renderImages() {
   allProducts[productThreeIndex].views++;
 }
 
-// // FUNCTION TO RENDER CHART
+// FUNCTION TO RENDER CHART
 
-// function renderChart() {
-//   const ctx = document.getElementById('chart').getContext('2d');
+function renderChart() {
+  const ctx = document.getElementById('chart').getContext('2d');
 
-//   // labels for chart
+  // labels for chart
 
-//   let products = [];
-//   let clicks = [];
-
-
-//   for (let i = 0; allProducts.length; i++) {
-//     products.push(allProducts[i].name);
-//     clicks.push(allProducts[i].clicks);
-//   }
-// }
-
-// let myChartData = {
-//   type: 'bar',
-//   data: {
-//     labels: products,
-//     datasets: [{
-//       label: '# of Votes',
-//       data: clicks,
-//       backgroundColor: ['rgba(75, 192, 192, 0.2)',],
-//       borderColor: ['rgba(255, 99, 132, 1)',],
-//       borderWidth: 1
-//     }]
-//   },
-//   options: {
-//     scales: {
-//       y: {
-//         beginAtZero: true
-//       }
-//     }
-//   }
-// };
+  let products = [];
+  let clicks = [];
+  let views = [];
 
 
-// const myChart = new Chart(ctx, 
+  for (let i = 0; i < allProducts.length; i++) {
 
+    products.push(allProducts[i].name);
+    clicks.push(allProducts[i].clicks);
+    views.push(allProducts[i].views);
+  }
+
+
+  let myChartData = {
+    type: 'bar',
+    defaults: {
+      color: 'red'
+    },
+    data: {
+      labels: products,
+      datasets: [{
+        label: '# of Votes',
+        data: clicks,
+        backgroundColor: 'rgba(226, 134, 150, 1)',
+        borderColor: 'rgba(0, 0, 0, 1)',
+        color: '#F00',
+        borderWidth: 3
+      },
+      {
+        label: '# of Views',
+        data: views,
+        backgroundColor: 'rgba(226, 134, 150, 1)',
+        borderColor: 'rgba(0, 0, 0, 1)',
+        borderWidth: 3
+      }]
+    },
+    options: {
+      plugins: {
+      legend: {
+        labels: {
+          color: 'black',
+        }
+      }
+    },
+      scales: {
+        y: {  
+          beginAtZero: true
+        },
+        x: {
+          ticks: {
+            color: 'black',
+          }
+        }
+      }
+    }
+  }
+
+
+  const myChart = new Chart(ctx, myChartData)
+
+};
 
 
 
@@ -152,7 +179,7 @@ function handleShowResultsClick(e) {
       li.textContent = `${allProducts[i].name} was viewed ${allProducts[i].views} times and clicked ${allProducts[i].clicks} times`;
       displayResults.appendChild(li);
     }
-
+    renderChart();
   }
 
 }
@@ -167,6 +194,7 @@ button.addEventListener('click', handleShowResultsClick);
 
 
 
+// 
 
 
 
