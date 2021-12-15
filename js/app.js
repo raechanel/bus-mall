@@ -50,11 +50,12 @@ function getRandomIndex() {
   return Math.floor(Math.random() * allProducts.length);
 }
 
+let productCollection = [];
+
 function renderImages() {
 
   // collection of values - an array
 
-  let productCollection = [];
 
   while (productCollection.length < 6) {
     let randomNum = getRandomIndex();
