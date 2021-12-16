@@ -24,25 +24,34 @@ function BusMall(name, fileExtention = 'jpeg') {
   allProducts.push(this);
 }
 
-new BusMall('bag');
-new BusMall('bottle');
-new BusMall('pots');
-new BusMall('tent');
-new BusMall('weights');
-new BusMall('broom');
-new BusMall('desk');
-new BusMall('lamp');
-new BusMall('ornament');
-new BusMall('sleeping-bag');
-new BusMall('vaccum');
-new BusMall('welcome-mat');
-new BusMall('guitar');
-new BusMall('drumset');
-new BusMall('piano');
-new BusMall('camera');
-new BusMall('notebook');
-new BusMall('pens');
+let retrievedProducts = localStorage.getItem('products');
 
+
+
+if (retrievedProducts){
+  let parsedProducts = JSON.parse(retrievedProducts);
+  allProducts = parsedProducts;
+} else {
+  // Product Instanciations //
+  new BusMall('bag');
+  new BusMall('bottle');
+  new BusMall('pots');
+  new BusMall('tent');
+  new BusMall('weights');
+  new BusMall('broom');
+  new BusMall('desk');
+  new BusMall('lamp');
+  new BusMall('ornament');
+  new BusMall('sleeping-bag');
+  new BusMall('vaccum');
+  new BusMall('welcome-mat');
+  new BusMall('guitar');
+  new BusMall('drumset');
+  new BusMall('piano');
+  new BusMall('camera');
+  new BusMall('notebook');
+  new BusMall('pens');
+}
 
 
 function getRandomIndex() {
@@ -162,6 +171,13 @@ function handleImgClick(e) {
   renderImages();
   if (clicks === allowedAttempts) {
     myContainer.removeEventListener('click', handleImgClick);
+
+    let stringifiedProducts = JSON.stringify(allProducts);
+    // console.log(stringifiedProducts);
+
+    localStorage.setItem('products', stringifiedProducts);
+
+
   }
 }
 
@@ -175,9 +191,19 @@ function handleShowResultsClick(e) {
       displayResults.appendChild(li);
     }
     renderChart();
+
+
   }
 
 }
+
+
+
+
+
+
+
+
 
 
 renderImages();
